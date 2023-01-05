@@ -1,0 +1,22 @@
+:root {
+  --primary-bk-color: rgb(28, 33, 39);
+  --secondary-bk-color: rgb(24, 28, 32);
+  --primary-accent-color: rgb(52, 131, 239);
+  --primary-font-color: rgb(218, 218, 218);
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.card {
+  background-color: var(--primary-bk-color);
+  color: var(--primary-font-color);
+  padding: 0.5ch;
+  border: 1px solid var(--primary-accent-color);
+}
+
+.heading {
+  color: var(--primary-accent-color);
+}
