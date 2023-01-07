@@ -5,6 +5,9 @@
   --secondary-bk-color: rgb(20, 24, 27);
   --primary-accent-color: rgb(52, 131, 239);
   --primary-font-color: rgb(218, 218, 218);
+  --confirm-color: rgb(114, 202, 114);
+  --warning-color: rgb(242, 94, 121);
+  --shadow-color: rgb(61, 57, 57);
   font-family: "Open Sans", sans-serif;
   color: var(--primary-font-color);
 }
@@ -24,35 +27,68 @@
 }
 
 .button,
-.submit {
-  background-color: var(--primary-bk-color);
+.submit,
+.cancel {
   padding: 5px 3ch;
-  color: var(--primary-accent-color);
   border: 1px solid black;
   border-radius: 1ch;
   box-shadow: 1px 1px 1px black;
 }
 
 .button {
+  color: var(--primary-accent-color);
+  background-color: var(--primary-bk-color);
   margin-left: auto;
   height: 2.5rem;
 }
 
+.submit {
+  background-color: var(--confirm-color);
+  color: var(--primary-bk-color);
+}
+
+.cancel {
+  background-color: var(--warning-color);
+  color: var(--primary-bk-color);
+}
+
 .button:active,
 .submit:active {
-  box-shadow: inset 1px 1px 1px black;
+  box-shadow: inset 1px 1px 1px var(--shadow-color);
 }
 
 .card-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  padding: 1ch;
+  gap: 1ch;
 }
 
 .card {
-  background-color: var(--primary-bk-color);
+  background-color: var(--secondary-bk-color);
   color: var(--primary-font-color);
-  padding: 0.5ch;
+  padding: 1rem;
   border: 1px solid var(--primary-accent-color);
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px var(--shadow-color);
+}
+
+.card h1 {
+  padding: 0;
+  margin: 0;
+  color: var(--primary-accent-color);
+}
+
+.is-read,
+.not-read,
+.delete-entry {
+  height: 2rem;
+  padding: 0.5ch 2ch;
+  background-color: var(--secondary-bk-color);
+}
+
+.is-read {
+  background-color: var(--confirm-color);
 }
 
 .heading {
@@ -66,6 +102,8 @@
   left: 40%;
   padding: 1rem;
   border-radius: 1ch;
+  box-shadow: 0px 0px 80px rgb(61, 57, 57);
+  z-index: 3;
 }
 
 .modal form {
