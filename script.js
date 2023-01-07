@@ -1,12 +1,48 @@
-// initial array for library
-const myLibrary = [];
-
-let testObj = {
+// placeholder for testing layout and dynamic DOM content functionality
+const testObj = {
   title: "The Hobbit",
   author: "J.R.R. Tolkien",
   pageCount: "1200",
   isRead: true,
 };
+
+// initial array for library
+const myLibrary = {};
+let libraryArray = [];
+
+// insert placeholder into obj
+myLibrary[testObj.title] = {
+  title: "The Hobbit",
+  author: "J.R.R. Tolkien",
+  pageCount: "1200",
+  isRead: true,
+};
+
+// constructor for Book
+function Book(title, author, pageCount, isRead) {
+  this.title = title;
+  this.author = author;
+  this.pageCount = pageCount;
+  this.isRead = isRead;
+}
+
+function addBookToLibrary() {
+  const form = document.getElementById("form");
+  const bookInput = Object.fromEntries(new FormData(form).entries());
+  console.log(bookInput);
+  myLibrary[bookInput.title] = new Book(
+    bookInput.title,
+    bookInput.author,
+    bookInput["page-ct"],
+    bookInput["is-read"]
+  );
+  libraryArray = Object.entries(myLibrary);
+  console.log(myLibrary);
+}
+
+addBookToLibrary();
+// console.log(myLibrary);
+// console.log(libraryArray);
 
 // functions to open and close modal
 const modal = document.querySelector(".modal");
@@ -26,17 +62,7 @@ const container = document.querySelector(".card-container");
 
 // remove card
 
-// get info out of form into a new object
-
-// constructor for Book
-function Book(title, author, pageCount, isRead) {
-  this.title = title;
-  this.author = author;
-  this.pageCount = pageCount;
-  this.isRead = isRead;
-}
-
-function addBookToLibrary() {}
+// get info out of form
 
 function newCard(object) {
   let card = document.createElement("div");
@@ -69,14 +95,14 @@ function setIsRead(element) {
   element.textContent = "I've read it!";
 }
 
-newCard(testObj);
+// newCard(testObj);
 
 function showCards() {
-  myLibrary.forEach((element) => {
-    newCard(element);
+  libraryArray.forEach((element) => {
+    newCard(element[1]);
   });
 }
-
+showCards();
 // button references and event listeners
 const newBookButton = document.getElementById("new-book");
 newBookButton.addEventListener("click", openModal);
