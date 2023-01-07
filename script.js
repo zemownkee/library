@@ -14,6 +14,7 @@ const cancelButton = document.querySelector(".cancel");
 const modal = document.querySelector(".modal");
 const closeButton = document.querySelector(".cancel");
 const newBookButton = document.getElementById("new-book");
+const modalDarken = document.querySelector(".darken");
 
 // initial array for library
 const myLibrary = {};
@@ -32,14 +33,14 @@ function setUnread(element) {
 }
 
 function newCard(object) {
-  let card = document.createElement("div");
-  let cardTitle = document.createElement("h1");
-  let cardAuthor = document.createElement("p");
-  let cardPageCount = document.createElement("p");
-  let readToggleButton = document.createElement("button");
+  const card = document.createElement("div");
+  const cardTitle = document.createElement("h1");
+  const cardAuthor = document.createElement("p");
+  const cardPageCount = document.createElement("p");
+  const readToggleButton = document.createElement("button");
   readToggleButton.classList.add("read-toggle-button");
-  let cardDeleteEntry = document.createElement("button");
-  cardDeleteEntry.classList.add("delete-entry");
+  const cardDeleteButton = document.createElement("button");
+  cardDeleteButton.classList.add("delete-entry");
   card.classList.add("card");
 
   cardTitle.textContent = `${object.title}`;
@@ -50,11 +51,14 @@ function newCard(object) {
     cardTitle,
     cardAuthor,
     cardPageCount,
-    cardIsRead,
-    cardDeleteEntry
+    readToggleButton,
+    cardDeleteButton
   );
 
   container.append(card);
+
+  readToggleButton.addEventListener("click", object.toggleRead());
+  cardDeleteButton.addEventListener("click", object.removeFromLibrary());
 }
 
 function showCards() {
@@ -101,10 +105,12 @@ function addBookToLibrary() {
 
 function openModal() {
   modal.classList.toggle("disabled");
+  modalDarken.classList.toggle("disabled");
 }
 
 function closeModal() {
   modal.classList.add("disabled");
+  modalDarken.classList.add("disabled");
 }
 
 // event listeners

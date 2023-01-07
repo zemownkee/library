@@ -18,6 +18,15 @@
   background-color: var(--primary-bk-color);
 }
 
+.darken {
+  position: relative;
+  /* top: -1.5rem; */
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
 .header {
   color: var(--primary-accent-color);
   display: flex;
