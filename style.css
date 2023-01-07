@@ -49,6 +49,7 @@
 
 .cancel {
   background-color: var(--warning-color);
+  content: cancel;
   color: var(--primary-bk-color);
 }
 
@@ -79,16 +80,26 @@
   color: var(--primary-accent-color);
 }
 
-.is-read,
-.not-read,
 .delete-entry {
   height: 2rem;
   padding: 0.5ch 2ch;
   background-color: var(--secondary-bk-color);
 }
 
-.is-read {
+.read-toggle-button {
+  height: 2rem;
+  padding: 0.5ch 2ch;
+  background-color: var(--secondary-bk-color);
+}
+
+.book-read {
   background-color: var(--confirm-color);
+  content: "I've read it!";
+}
+
+.book-unread {
+  background-color: var(--warning-color);
+  content: "Not read";
 }
 
 .heading {
