@@ -137,4 +137,8 @@ function closeModal() {
 // event listeners
 newBookButton.addEventListener("click", openModal);
 closeButton.addEventListener("click", closeModal);
-submitNew.addEventListener("click", addBookToLibrary);
+submitNew.addEventListener("click", (e) => {
+  addBookToLibrary(e);
+  form.reset();
+  closeModal();
+});
