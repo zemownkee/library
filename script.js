@@ -56,19 +56,24 @@ function newCard(object) {
   );
 
   container.append(card);
-
-  readToggleButton.addEventListener("click", object.toggleRead());
-  cardDeleteButton.addEventListener("click", object.removeFromLibrary());
 }
 
 function showCards() {
   libraryArray.forEach((element) => {
-    newCard(element[1]);
+    element.order = libraryArray.indexOf(element);
+    console.log(element);
+    newCard(element);
   });
 }
 
+function removeAllChildNodes(parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+}
+
 function refreshLibraryView() {
-  libraryArray = Object.entries(myLibrary);
+  removeAllChildNodes(container);
   showCards();
 }
 
@@ -91,15 +96,17 @@ Book.prototype.removeFromLibrary = function () {
   refreshLibraryView();
 };
 
-function addBookToLibrary() {
+function addBookToLibrary(e) {
+  e.preventDefault();
   const bookInput = Object.fromEntries(new FormData(form).entries());
   console.log(bookInput);
-  myLibrary[bookInput.title] = new Book(
+  const newObj = new Book(
     bookInput.title,
     bookInput.author,
     bookInput["page-ct"],
     bookInput["is-read"]
   );
+  libraryArray.push(newObj);
   refreshLibraryView();
 }
 
@@ -114,6 +121,6 @@ function closeModal() {
 }
 
 // event listeners
-
 newBookButton.addEventListener("click", openModal);
 closeButton.addEventListener("click", closeModal);
+submitNew.addEventListener("click", addBookToLibrary);
