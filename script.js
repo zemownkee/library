@@ -17,8 +17,7 @@ const newBookButton = document.getElementById("new-book");
 const modalDarken = document.querySelector(".darken");
 
 // initial array for library
-const myLibrary = {};
-let libraryArray = [];
+let myLibrary = [];
 
 function setIsRead(element) {
   element.classList.add("book-read");
@@ -38,8 +37,9 @@ function newCard(object) {
   const cardAuthor = document.createElement("p");
   const cardPageCount = document.createElement("p");
   const readToggleButton = document.createElement("button");
-  readToggleButton.classList.add("read-toggle-button");
   const cardDeleteButton = document.createElement("button");
+
+  readToggleButton.classList.add("read-toggle-button");
   cardDeleteButton.classList.add("delete-entry");
   card.classList.add("card");
 
@@ -55,12 +55,15 @@ function newCard(object) {
     cardDeleteButton
   );
 
+  readToggleButton.addEventListener("click", object.toggleRead);
+  cardDeleteButton.addEventListener("click", object.removeFromLibrary);
+
   container.append(card);
 }
 
 function showCards() {
-  libraryArray.forEach((element) => {
-    element.order = libraryArray.indexOf(element);
+  myLibrary.forEach((element) => {
+    element.order = myLibrary.indexOf(element);
     console.log(element);
     newCard(element);
   });
@@ -89,10 +92,11 @@ Book.prototype.toggleRead = function () {
   if (this.isRead === true) {
     this.isRead = false;
   } else this.Read = true;
+  refreshLibraryView();
 };
 
 Book.prototype.removeFromLibrary = function () {
-  delete myLibrary[this.title];
+  myLibrary.splice(`${this.order}`, 1);
   refreshLibraryView();
 };
 
@@ -106,7 +110,8 @@ function addBookToLibrary(e) {
     bookInput["page-ct"],
     bookInput["is-read"]
   );
-  libraryArray.push(newObj);
+
+  myLibrary.push(newObj);
   refreshLibraryView();
 }
 
