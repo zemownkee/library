@@ -96,7 +96,7 @@ Book.prototype.toggleRead = function () {
 };
 
 Book.prototype.removeFromLibrary = function () {
-  myLibrary.splice(`${this.order}`, 1);
+  myLibrary.splice(this.order, 1);
   refreshLibraryView();
 };
 
