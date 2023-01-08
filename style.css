@@ -37,7 +37,9 @@
 
 .button,
 .submit,
-.cancel {
+.cancel,
+.read-toggle-button,
+.delete-entry {
   padding: 5px 3ch;
   border: 1px solid black;
   border-radius: 1ch;
@@ -92,7 +94,12 @@
 .delete-entry {
   height: 2rem;
   padding: 0.5ch 2ch;
-  background-color: var(--secondary-bk-color);
+  background-color: var(--warning-color);
+  margin-left: 1ch;
+}
+
+.delete-entry::after {
+  content: "Delete";
 }
 
 .read-toggle-button {
@@ -103,11 +110,17 @@
 
 .book-read {
   background-color: var(--confirm-color);
+}
+
+.book-read::after {
   content: "I've read it!";
 }
 
 .book-unread {
   background-color: var(--warning-color);
+}
+
+.book-unread::after {
   content: "Not read";
 }
 

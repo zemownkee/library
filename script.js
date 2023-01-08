@@ -19,16 +19,15 @@ const modalDarken = document.querySelector(".darken");
 // initial array for library
 let myLibrary = [];
 
-function setIsRead(element) {
-  element.classList.add("book-read");
-  element.classList.remove("book-unread");
-  element.textContent = "I've read it!";
-}
-
-function setUnread(element) {
-  element.classList.add("book-unread");
-  element.classList.remove("book-read");
-  element.textContent = "Unread";
+function styleButton(button, object) {
+  if (object.isRead === true) {
+    button.classList.add("book-read");
+    button.classList.remove("book-unread");
+  } else {
+    button.classList.add("book-unread");
+    button.classList.remove("book-read");
+  }
+  console.log(button);
 }
 
 function newCard(object) {
@@ -47,6 +46,8 @@ function newCard(object) {
   cardAuthor.textContent = `Author: ${object.author}`;
   cardPageCount.textContent = `Page Count: ${object.pageCount}`;
 
+  styleButton(readToggleButton, object);
+
   card.append(
     cardTitle,
     cardAuthor,
@@ -55,8 +56,8 @@ function newCard(object) {
     cardDeleteButton
   );
 
-  readToggleButton.addEventListener("click", object.toggleRead);
-  cardDeleteButton.addEventListener("click", object.removeFromLibrary);
+  readToggleButton.addEventListener("click", () => object.toggleRead());
+  cardDeleteButton.addEventListener("click", () => object.removeFromLibrary());
 
   container.append(card);
 }
@@ -64,7 +65,6 @@ function newCard(object) {
 function showCards() {
   myLibrary.forEach((element) => {
     element.order = myLibrary.indexOf(element);
-    console.log(element);
     newCard(element);
   });
 }
@@ -91,26 +91,35 @@ function Book(title, author, pageCount, isRead) {
 Book.prototype.toggleRead = function () {
   if (this.isRead === true) {
     this.isRead = false;
-  } else this.Read = true;
+  } else this.isRead = true;
+  console.log(this);
   refreshLibraryView();
 };
 
 Book.prototype.removeFromLibrary = function () {
   myLibrary.splice(this.order, 1);
+  console.log(this);
   refreshLibraryView();
 };
 
 function addBookToLibrary(e) {
   e.preventDefault();
   const bookInput = Object.fromEntries(new FormData(form).entries());
-  console.log(bookInput);
+
+  let cleanedisRead;
+
+  if (!bookInput["is-read"]) {
+    cleanedisRead = false;
+  } else cleanedisRead = true;
+  console.log(cleanedisRead);
+
   const newObj = new Book(
     bookInput.title,
     bookInput.author,
     bookInput["page-ct"],
-    bookInput["is-read"]
+    cleanedisRead
   );
-
+  console.log(newObj);
   myLibrary.push(newObj);
   refreshLibraryView();
 }
